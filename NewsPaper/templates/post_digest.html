@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+{% load custom_filters %}
+{% load custom_tags %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ title }} за период с {{ date_from|date:'d.M.Y' }} по {{ date_to|date:'d.M.Y' }}.</title>
+</head>
+<body>
+    <h2>Здравствуй {{ user }}</h2>
+    <p>Рассылка постов за период с {{ date_from|date:'d.M.Y' }} по {{ date_to|date:'d.M.Y' }} в твоем любимом разделе "{{ category }}"!</p>
+           {% for one in posts %}
+               <td>
+                  {% if one.typ == 'NW' %}
+                   <a href={{ url_start }}news/{{ one.id }}> {{ one.id }} {{ one.title }} {{ one.creation|date:'d.M.Y' }} {{ one.text|truncatechars:20|censor }}</a>
+                   {% else %}
+                   <a href={{ url_start }}articles/{{ one.id }}>{{ one.id }} {{ one.title }} {{ one.creation|date:'d.M.Y' }} {{ one.text|truncatechars:20|censor }}</a>
+                   {% endif %}
+                <br>
+               </td>
+           {% endfor %}
+</body>
+</html>

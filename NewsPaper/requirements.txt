@@ -1,0 +1,6 @@
+Django
+django-allauth
+django-filter
+celery
+redis
+django-celery-beat

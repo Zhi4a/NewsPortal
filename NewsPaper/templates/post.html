@@ -1,0 +1,23 @@
+{% extends 'flatpages/default.html' %}
+{% load custom_filters %}
+
+{% block title %}
+"{{ post.title }}"
+{% endblock title %}
+
+{% block content %}
+<h1>{{ post.title|currency }}</h1>
+<h6>{{ post.time|date:'d M Y' }}</h6>
+<h4>{{ post.text|currency }}</h4>
+<h6>Рейтинг: {{ post.rating }}</h6>
+<h6>Автор: {{ post.author.user }} </h6>
+<h6>Категории:</h6>
+{% for cat in post.category.all %}
+    <td6>{{ cat.category }}</td6>
+    {% if request.user not in cat.subscribers.all %}
+        <td6><a href="{% url 'subscribe' cat.pk %}">Подписаться на новости категории</a></td6>
+    {% else %}
+        <td6><a href="{% url 'unsubscribe' cat.pk %}">Отписаться от новостей категории</a></td6>
+    {% endif %}
+{% endfor %}
+{% endblock content %}
