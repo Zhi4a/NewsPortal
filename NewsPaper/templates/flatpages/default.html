@@ -1,5 +1,7 @@
 <!DOCTYPE html>
+{% load cache %}
 <html lang="en">
+{% cache 30 navbar %}
     <head>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
@@ -36,6 +38,7 @@
             </div>
         </nav>
     </body>
+{% endcache %}
     <div class="container">
         <div class="row">
             <div class="col-lg-12 text-center">

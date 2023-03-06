@@ -1,5 +1,10 @@
 from celery import shared_task
-import time
+from django.template.loader import render_to_string
+from django.core.mail import EmailMultiAlternatives
+from django.contrib.auth.models import User
+from news.models import Post, SubscribersCategory
+from datetime import date, timedelta
+from django.db.models import Q
 
 
 @shared_task
